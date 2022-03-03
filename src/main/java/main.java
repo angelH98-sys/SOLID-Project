@@ -24,8 +24,12 @@ public class main {
 
     public static void valoresDefecto()
     {
+
+        //Esto de aca no queda mejor como un Array o un Map?? (lineas 29 a 62)
         //Setting compradores por defecto
-        administradorCompradores
+
+
+                administradorCompradores
                 .agregarComprador(new Compradores("RMJ1234","Rosa Maria Juarez", "rosa@mail.com"));
         administradorCompradores
                 .agregarComprador(new Compradores("EF12342","Ernesto Fernandez", "ernesto@mail.com"));
