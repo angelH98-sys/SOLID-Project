@@ -9,7 +9,7 @@ import modelos.Empleados;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdministradorCompradores implements ServicioCompradores {
+public class OLISAdministradorCompradores implements ServicioCompradores {
 
     @Setter @Getter
     private List<Compradores> compradoresRegistrados = new ArrayList<>();
@@ -29,5 +29,14 @@ public class AdministradorCompradores implements ServicioCompradores {
     public void deshabilitarComprador(String compradorId) {
 //TODO: logica para modificar empleado
         return;
+}
+    @java.lang.Override
+    public void compradoresPorDefecto(){
+        this.compradoresRegistrados.add(new Compradores("RMJ1234","Rosa Maria Juarez", "rosa@mail.com"));
+        administradorCompradores
+                .agregarComprador(new Compradores("EF12342","Ernesto Fernandez", "ernesto@mail.com"));
+        administradorCompradores
+                .agregarComprador(new Compradores("MAO1323","Matias Alejandro Olmedo", "matias@mail.com"));
+
     }
 }

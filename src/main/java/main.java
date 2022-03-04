@@ -31,12 +31,6 @@ public class main {
         //Setting compradores por defecto
 
 
-                administradorCompradores
-                .agregarComprador(new Compradores("RMJ1234","Rosa Maria Juarez", "rosa@mail.com"));
-        administradorCompradores
-                .agregarComprador(new Compradores("EF12342","Ernesto Fernandez", "ernesto@mail.com"));
-        administradorCompradores
-                .agregarComprador(new Compradores("MAO1323","Matias Alejandro Olmedo", "matias@mail.com"));
 
         //Setting empleados por defecto
 
