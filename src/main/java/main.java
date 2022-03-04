@@ -42,10 +42,8 @@ public class main {
 
 
 
-        //Setting productos por defecto
-        administradorProductos
-                .agregarProducto(new Productos("BIC28371", "Bicicleta", "CJR1837"));
-    }
+
+}
 
 
 }

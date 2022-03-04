@@ -11,7 +11,7 @@ import java.util.List;
 public class AdministradorProductos implements ServicioProductos {
 
     @Setter @Getter
-    private List<Productos> productosAlmacenados = new ArrayList<>();
+    private List<Productos>  = new ArrayList<>();
 
     @Override
     public void agregarProducto(Productos producto) {
@@ -29,5 +29,10 @@ public class AdministradorProductos implements ServicioProductos {
     public void deshabilitarProducto(String productoid) {
         //TODO: logica para modificar producto
         return;
+    }
+    @java.lang.Override
+    public void ProductosPorDefecto(){
+        this.productosAlmacenados.add(new Productos("BIC28371", "Bicicleta", "CJR1837"));
+
     }
 }
