@@ -20,26 +20,10 @@ public class AdministradorEmpleados implements ServicioEmpleados {
     }
 
     @Override
-    public void modificarEmpleado(Empleados empleado) {
-        //TODO: logica para modificar empleado
-        return;
-    }
-
-    @Override
-    public void deshabilitarEmpleado(String empleadoId) {
-        //TODO: logica para modificar empleado
-        return;
-    }
-
-    @java.lang.Override
     public void empleadosPorDefecto() {
-        administradorEmpleados
-                .agregarEmpleado(new Empleados("JR7374", "Juan Ruiz"));
-        administradorEmpleados
-                .agregarEmpleado(new Empleados("ALG283", "Alicia Luján Gutierrez"));
-        administradorEmpleados
-                .agregarEmpleado(new Empleados("JTC1827", "Julio Tomas de la Cruz"));
-        administradorEmpleados
-                .agregarEmpleado(new Empleados("SD28371", "Santiago Diaz"));
+        empleadosRegistrados.add(new Empleados("JR7374", "Juan Ruiz"));
+        empleadosRegistrados.add(new Empleados("ALG283", "Alicia Luján Gutierrez"));
+        empleadosRegistrados.add(new Empleados("JTC1827", "Julio Tomas de la Cruz"));
+        empleadosRegistrados.add(new Empleados("SD28371", "Santiago Diaz"));
     }
 }

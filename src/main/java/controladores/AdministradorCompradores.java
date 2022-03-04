@@ -20,14 +20,12 @@ public class AdministradorCompradores implements ServicioCompradores {
     }
 
     @Override
-    public void modificarComprador(Compradores comprador) {
-//TODO: logica para modificar empleado
-        return;
+    public void agregarCompradoresPorDefecto() {
+        compradoresRegistrados.add(new Compradores("RMJ1234","Rosa Maria Juarez", "rosa@mail.com"));
+        compradoresRegistrados.add(new Compradores("EF12342","Ernesto Fernandez", "ernesto@mail.com"));
+        compradoresRegistrados.add(new Compradores("MAO1323","Matias Alejandro Olmedo", "matias@mail.com"));
+
     }
 
-    @Override
-    public void deshabilitarComprador(String compradorId) {
-//TODO: logica para modificar empleado
-        return;
-    }
+
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public class AdministradorProductos implements ServicioProductos {
 
     @Setter @Getter
-    private List<Productos>  = new ArrayList<>();
+    private List<Productos> productosAlmacenados = new ArrayList<>();
 
     @Override
     public void agregarProducto(Productos producto) {
@@ -20,19 +20,9 @@ public class AdministradorProductos implements ServicioProductos {
     }
 
     @Override
-    public void modificarProducto(Productos producto) {
-        //TODO: logica para modificar producto
-        return;
-    }
-
-    @Override
-    public void deshabilitarProducto(String productoid) {
-        //TODO: logica para modificar producto
-        return;
-    }
-    @java.lang.Override
-    public void ProductosPorDefecto(){
+    public void productosPorDefecto(){
         this.productosAlmacenados.add(new Productos("BIC28371", "Bicicleta", "CJR1837"));
-
+        this.productosAlmacenados.add(new Productos("EDP23938", "Equipos de proteccion", "AT18272"));
+        this.productosAlmacenados.add(new Productos("REP39481", "Repuestos", "CJR1837"));
     }
 }
