@@ -39,14 +39,7 @@ public class main {
                 .agregarComprador(new Compradores("MAO1323","Matias Alejandro Olmedo", "matias@mail.com"));
 
         //Setting empleados por defecto
-        administradorEmpleados
-                .agregarEmpleado(new Empleados("JR7374", "Juan Ruiz"));
-        administradorEmpleados
-                .agregarEmpleado(new Empleados("ALG283", "Alicia Luján Gutierrez"));
-        administradorEmpleados
-                .agregarEmpleado(new Empleados("JTC1827", "Julio Tomas de la Cruz"));
-        administradorEmpleados
-                .agregarEmpleado(new Empleados("SD28371", "Santiago Diaz"));
+
 
 
         //Setting productos por defecto
