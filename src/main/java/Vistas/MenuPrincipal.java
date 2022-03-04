@@ -18,7 +18,6 @@ public class MenuPrincipal {
 
         Scanner input = new Scanner(System.in);
         int option;
-
         do {
             MenuInicial();
 

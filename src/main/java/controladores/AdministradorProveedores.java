@@ -30,4 +30,18 @@ public class AdministradorProveedores implements ServicioProveedores {
         //TODO: logica para modificar proveedor
         return;
     }
+
+    @java.lang.Override
+    public void proveedoresPorDefecto() {
+        //Setting proveedores por defecto
+        this.proveedoresRegistrados.add(new Proveedores("CJR1837", "Ciclas Juan Ramon",
+                        "+1 123 123 3234", "ciclicas@mail.com"));
+        administradorProveedores
+                .agregarProveedor(new Proveedores("AT18272", "Accesorios Tito",
+                        "+503 2938 2038", "tito@mail.com"));
+        administradorProveedores
+                .agregarProveedor(new Proveedores("SS29383", "Suma Salud",
+                        "+1 123 123 3234", "salud@mail.com"));
+
+    }
 }
