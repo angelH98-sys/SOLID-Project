@@ -14,18 +14,17 @@ import static Helpers.clearScreen.clearScreen;
 public class MenuPrincipal {
     private Sell venta1 = new Sell();
     public void MenuInicial (List<Productos>listaProductos){
-        System.out.println("%%%%%%%%%%");
-        System.out.println("productos en ticket: "+ venta1.getListaOrden().size()+" producto(s) ");
-        System.out.println(" subtotal: $ "+venta1.getTotal());
+        System.out.println("---------------------//--------------------");
+        System.out.println("Productos en carrito: "+ venta1.getListaOrden().size()+" producto(s) ");
+        System.out.println("Subtotal: $ "+venta1.getTotal());
 
-        System.out.println("%%%%%%%%%%");
-        for(int i=0; i< listaProductos.size() ;i++){
+        System.out.println("---------------------//--------------------");
+        for(int i=0; i<listaProductos.size();i++){
             System.out.println((i+1)+" "+listaProductos.get(i).getNombre()+" $ " +listaProductos.get(i).getValorUnitario());
-            if((i+1) == listaProductos.size()){
-                System.out.println("si desea salir, presione "+(listaProductos.size()+1));
-            }
-
         }
+        System.out.println((listaProductos.size()+1) + " Pagar");
+        System.out.println((listaProductos.size()+2) + " Salir");
+
     }
 
 
@@ -42,18 +41,21 @@ public class MenuPrincipal {
                 System.out.println("Seleccione una opcion: ");
                 option = input.nextInt();
                 if (option>=1 && option<=listaProductos.size()){
-                    System.out.println("digita la cantidad que quieres del producto");
+                    System.out.println("Digita la cantidad que deseas comprar: ");
                     cantidad = input.nextInt();
                     if (cantidad>=1){
+                        clearScreen();
                         venta1.agregarProductoOrden(listaProductos.get(option-1), cantidad);
-                        System.out.println("Producto agregado al ticket");
+                        System.out.println("Nuevo producto agregado!");
                         Thread.sleep(2000);
                         clearScreen();
                     } else {
-                        System.out.println("por favor ingresa una cantidad valida");
+                        System.out.println("Por favor ingresa una cantidad valida");
                     }
 
                 }else if(option==(listaProductos.size()+1)){
+                    //Continuar a pagar;
+                }else if(option==(listaProductos.size()+2)){
                     System.out.println("Gracias, vuelva pronto");
                 }
                 else{
@@ -90,6 +92,6 @@ public class MenuPrincipal {
                 option = input.nextInt();
             }
 
-        } while (option != (listaProductos.size()+1));
+        } while (option != (listaProductos.size()+2));
     }
 }
