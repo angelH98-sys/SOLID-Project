@@ -18,12 +18,15 @@ public class Productos {
     @Getter @Setter
     private int stock;
 
-    public Productos(String productoid, String nombre, String proveedorId) {
+    public Productos(String productoid, String nombre, String proveedorId, Double valorUnitario) {
         this.productoid = productoid;
         this.nombre = nombre;
-        this.valorUnitario = 0.0;
+        this.valorUnitario = valorUnitario;
         this.proveedorId = proveedorId;
         this.status = "Activo";
         this.stock = 0;
+    }
+    public Productos(){
+
     }
 }

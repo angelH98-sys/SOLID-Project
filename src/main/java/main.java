@@ -15,7 +15,7 @@ public class main {
 
         valoresDefecto();
         MenuPrincipal menu = new MenuPrincipal();
-        menu.menu();
+        menu.menu(administradorProductos.getProductosAlmacenados());
     }
 
     public static void valoresDefecto()
