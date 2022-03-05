@@ -8,6 +8,7 @@ import static Helpers.clearScreen.clearScreen;
 public class MenuPrincipal {
     public void MenuInicial (){
         System.out.println("Bienvenido! \nComo le podemos ayudar?\n");
+        //TODO: debemos mostrar los productos que actualmente tenemos registrados
         System.out.println("1. Bicicletas");
         System.out.println("2. Equipos de proteccion");
         System.out.println("3. Repuestos");

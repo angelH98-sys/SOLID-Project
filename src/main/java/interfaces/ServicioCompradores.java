@@ -8,4 +8,5 @@ public interface ServicioCompradores {
     void modificarComprador(Compradores comprador);
     void deshabilitarComprador(String compradorId);
     void compradoresPorDefecto();
+
 }
