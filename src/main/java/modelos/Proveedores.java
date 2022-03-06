@@ -23,4 +23,6 @@ public class Proveedores {
         this.mail = mail;
         this.status = "Activo";
     }
+
+    public Proveedores(){}
 }

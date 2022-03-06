@@ -24,7 +24,6 @@ public class AdministradorCompradores implements ServicioCompradores {
         compradoresRegistrados.add(new Compradores("RMJ1234","Rosa Maria Juarez", "rosa@mail.com"));
         compradoresRegistrados.add(new Compradores("EF12342","Ernesto Fernandez", "ernesto@mail.com"));
         compradoresRegistrados.add(new Compradores("MAO1323","Matias Alejandro Olmedo", "matias@mail.com"));
-
     }
 
 
