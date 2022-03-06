@@ -169,7 +169,7 @@ public class AdministradorVentaCompra implements ServicioVentas {
 
         crearComprobanteDePago();
 
-        enviarMail();
+        enviarMail(mail);
     }
 
     public String getProductoId()
@@ -292,7 +292,7 @@ public class AdministradorVentaCompra implements ServicioVentas {
         }
     }
 
-    private void enviarMail() {
+    private void enviarMail(String mail) {
         //logica para enviar mail
     }
 
