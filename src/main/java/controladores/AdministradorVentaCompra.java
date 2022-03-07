@@ -13,8 +13,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+
 
 public class AdministradorVentaCompra implements ServicioVentas {
 
@@ -293,7 +295,15 @@ public class AdministradorVentaCompra implements ServicioVentas {
     }
 
     private void enviarMail(String mail) {
-        //logica para enviar mail
+        //Creacion de Número Aleatorio para el ID del Ticket
+        Random rand = new Random(); //instance of random class
+        int upperbound = 1000;
+        //generate random values from 0-24
+        int int_random = rand.nextInt(upperbound);
+        modelos.EnvioCorreo utilidadesCorreo = new modelos.EnvioCorreo();
+
+        utilidadesCorreo.enviar( mail, "Ticket: "+int_random, "Remitimos su Ticket adjunto en este correo. Gracias por Preferirnos" );
+
     }
 
 }
