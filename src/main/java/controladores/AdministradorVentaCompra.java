@@ -169,9 +169,9 @@ public class AdministradorVentaCompra implements ServicioVentas {
 
         }while (true);
 
-        crearComprobanteDePago();
+       String valorRuta = crearComprobanteDePago();
 
-        enviarMail(mail);
+        enviarMail(mail,valorRuta);
     }
 
     public String getProductoId()
@@ -260,7 +260,7 @@ public class AdministradorVentaCompra implements ServicioVentas {
         }while (true);
     }
 
-    private void crearComprobanteDePago()
+    private String crearComprobanteDePago()
     {
         String cuerpoComprobante = "\tTicket de compra";
 
@@ -283,26 +283,28 @@ public class AdministradorVentaCompra implements ServicioVentas {
 
         cuerpoComprobante += "\nGRACIAS POR PREFERIRNOS";
 
+        String ruta = "";
+
         try {
             FileWriter ticket = new FileWriter("ticket.txt");
             ticket.write(cuerpoComprobante);
             ticket.close();
+            //codigo agregado
+            File f = new File("ticket.txt");
+             ruta = f.getAbsolutePath();
             System.out.println("Comprobante generado exitosamente");
+
         } catch (IOException e) {
             System.out.println("No fue posible crear comprobante");
             e.printStackTrace();
         }
+        return ruta;
     }
 
-    private void enviarMail(String mail) {
-        //Creacion de Número Aleatorio para el ID del Ticket
-        Random rand = new Random(); //instance of random class
-        int upperbound = 1000;
-        //generate random values from 0-24
-        int int_random = rand.nextInt(upperbound);
+    private void enviarMail(String mail,String valorRuta) {
+       //Creando Objeto
         modelos.EnvioCorreo utilidadesCorreo = new modelos.EnvioCorreo();
-
-        utilidadesCorreo.enviar( mail, "Ticket: "+int_random, "Remitimos su Ticket adjunto en este correo. Gracias por Preferirnos" );
+        utilidadesCorreo.enviar( mail, "Ticket: "+utilidadesCorreo.generarCodigo(), "Remitimos su Ticket adjunto en este correo.<br> Gracias por Preferirnos",valorRuta);
 
     }
 

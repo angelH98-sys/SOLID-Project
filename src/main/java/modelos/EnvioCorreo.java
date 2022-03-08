@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 //--Agregando los import para el envio de correo
 import java.util.Properties;
+import java.util.Random;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -50,7 +51,7 @@ public class EnvioCorreo {
         this.password = password;
     }
 
-    public void enviar( String receptor, String asunto, String mensaje ) {
+    public void enviar( String receptor, String asunto, String mensaje, String valorRuta) {
 
         //Seteando las propiedades para el envio de correo
         Properties props = new Properties();
@@ -94,7 +95,7 @@ public class EnvioCorreo {
             //Archivo Adjunto
             MimeBodyPart attachmentPart = new MimeBodyPart();
 
-            FileDataSource fileDataSource = new FileDataSource( "C:\\Users\\HP\\Documents\\GitHub\\SOLID-Project\\ticket.txt" );
+            FileDataSource fileDataSource = new FileDataSource( valorRuta );
 
             attachmentPart.setDataHandler( new DataHandler( fileDataSource ) );
             attachmentPart.setFileName( fileDataSource.getName() );
@@ -113,8 +114,21 @@ public class EnvioCorreo {
         }
         catch( MessagingException exc ) {
 
-            throw new RuntimeException( exc );
+            throw new RuntimeException("No fue posible enviar el correo");
         }
     }//Fin de la funcion de envío de correo
 
+
+    //Función que genera el código de ticket que se envía por correo
+    public int generarCodigo(){
+      //Creacion de Número Aleatorio para el ID del Ticket
+        Random rand = new Random(); //instance of random class
+        int upperbound = 1000;
+        //generate random values from 0-24
+        int int_random = rand.nextInt(upperbound);
+
+       return int_random;
+    }
+
 }
+
