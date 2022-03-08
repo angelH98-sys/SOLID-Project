@@ -20,14 +20,14 @@ public class AdministradorProveedores implements ServicioProveedores {
     }
 
     @Override
-    public void proveedoresPorDefecto() {
-        //Setting proveedores por defecto
+    public void agregarProveedoresPorDefecto() {
         this.proveedoresRegistrados.add(new Proveedores("CJR1837", "Ciclas Juan Ramon",
-                        "+1 123 123 3234", "ciclicas@mail.com"));
+                "+1 123 123 3234", "ciclicas@mail.com"));
         this.proveedoresRegistrados.add(new Proveedores("AT18272", "Accesorios Tito",
-                        "+503 2938 2038", "tito@mail.com"));
+                "+503 2938 2038", "tito@mail.com"));
         this.proveedoresRegistrados.add(new Proveedores("SS29383", "Suma Salud",
-                        "+1 123 123 3234", "salud@mail.com"));
-
+                "+1 123 123 3234", "salud@mail.com"));
     }
+
+
 }

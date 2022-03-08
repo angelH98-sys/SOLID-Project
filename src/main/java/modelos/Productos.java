@@ -6,7 +6,7 @@ import lombok.Setter;
 public class Productos {
 
     @Getter @Setter
-    private String productoid;
+    private String productoId;
     @Getter @Setter
     private String nombre;
     @Getter @Setter
@@ -18,13 +18,13 @@ public class Productos {
     @Getter @Setter
     private int stock;
 
-    public Productos(String productoid, String nombre, String proveedorId, Double valorUnitario) {
-        this.productoid = productoid;
+    public Productos(String productoid, String nombre, String proveedorId, Double valorUnitario, int stock) {
+        this.productoId = productoid;
         this.nombre = nombre;
         this.valorUnitario = valorUnitario;
         this.proveedorId = proveedorId;
         this.status = "Activo";
-        this.stock = 0;
+        this.stock = stock;
     }
     public Productos(){
 

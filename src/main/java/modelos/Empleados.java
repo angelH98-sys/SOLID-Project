@@ -6,14 +6,14 @@ import lombok.Setter;
 public class Empleados {
 
     @Getter @Setter
-    private String IdEmpleado;
+    private String empleadoId;
     @Getter @Setter
     private String nombre;
     @Getter @Setter
     private String status;
 
-    public Empleados(String idEmpleado, String nombre) {
-        IdEmpleado = idEmpleado;
+    public Empleados(String empleadoId, String nombre) {
+        this.empleadoId = empleadoId;
         this.nombre = nombre;
         this.status = "Activo";
     }

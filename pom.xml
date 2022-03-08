@@ -6,12 +6,14 @@
 
     <groupId>org.example</groupId>
     <artifactId>SOLID-Project</artifactId>
+
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
     </properties>
+
 
     <dependencies>
         <dependency>
@@ -20,6 +22,15 @@
             <version>1.18.22</version>
             <scope>provided</scope>
         </dependency>
+
+
+        <!--Adding Dependency to Send Email-->
+    <dependency>
+        <groupId>com.sun.mail</groupId>
+        <artifactId>jakarta.mail</artifactId>
+        <version>1.6.3</version>
+    </dependency>
+
     </dependencies>
 
 </project>

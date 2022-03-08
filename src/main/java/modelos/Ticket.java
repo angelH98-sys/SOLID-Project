@@ -9,32 +9,23 @@ import java.util.List;
 
 public class Ticket {
     @Getter @Setter
-    String TicketId;
-    @Getter
-    @Setter
-    private List<OrderList> ListaOrden;
+    private String ticketId;
+    @Getter@Setter
+    private List<OrderList> listaOrden;
     @Getter @Setter
-    private String EmployeeId;
+    private String employeeId;
     @Getter @Setter
-    private Date TicketDate;
+    private Date ticketDate;
     @Getter @Setter
-    private Double Total;
+    private Double total;
 
-    public Ticket(String TicketId, String EmployeeId, Date TicketDate, Double Total){
-        this.TicketDate = TicketDate;
-        this.TicketId = TicketId;
-        this.EmployeeId = EmployeeId;
-        this.Total = Total;
-
-
-    }
     public Ticket(){
-        this.Total = 0.0;
-        this.ListaOrden = new ArrayList<>();
+        this.total = 0.0;
+        this.listaOrden = new ArrayList<>();
     }
     public void agregarProductoOrden(Productos producto, int cantidad){
         double total = producto.getValorUnitario() * cantidad;
-        this.Total += total;
-        this.ListaOrden.add(new OrderList(producto.getProductoid(), cantidad, producto.getValorUnitario(), total));
+        this.total += total;
+        this.listaOrden.add(new OrderList(producto.getProductoId(), cantidad, producto.getValorUnitario(), total));
     }
 }
