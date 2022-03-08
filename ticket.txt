@@ -1,10 +1,9 @@
 	Ticket de compra
-Fecha de compra: Mon Mar 07 21:15:39 CST 2022
+Fecha de compra: Tue Mar 08 10:11:50 COT 2022
 
 Productos seleccionados
 ID			|Cantidad		|PrecioUni	|Total
-BIC28371	3			$350.00		$1050.00
-CP578423	2			$200.00		$400.00
+BIC28371	1			$350,00		$350,00
 ---------------------------------
-									$1450.00
+									$350,00
 GRACIAS POR PREFERIRNOS

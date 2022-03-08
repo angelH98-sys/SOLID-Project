@@ -1,5 +1,6 @@
 package Vistas;
 
+import Helpers.IngresarOpcionValida;
 import modelos.*;
 
 import java.io.IOException;
@@ -36,12 +37,7 @@ public class MenuPrincipal {
 
                 //if(Integer.parseInt(opcion) < 1 || Integer.parseInt(opcion) > 7){
                 if(Integer.parseInt(opcion) < 1 || Integer.parseInt(opcion) > 2){
-                    System.out.print("\nPor favor, ingresa una opción válida");
-                    Thread.sleep(1000);
-                    System.out.print(".");
-                    Thread.sleep(1000);
-                    System.out.print(".");
-                    Thread.sleep(500);
+                    IngresarOpcionValida.imprimir();
                     continue;
                 }
 
@@ -78,12 +74,7 @@ public class MenuPrincipal {
                 finMenu = true;
 
             } catch (Exception e) {
-                System.out.print("\nPor favor, ingresa una opción válida");
-                Thread.sleep(1000);
-                System.out.print(".");
-                Thread.sleep(1000);
-                System.out.print(".");
-                Thread.sleep(500);
+                IngresarOpcionValida.imprimir();
             }
         }while (finMenu == false);
 
@@ -114,12 +105,7 @@ public class MenuPrincipal {
                 opcion = this.scanner.nextLine();
 
                 if(Integer.parseInt(opcion) < 1 || Integer.parseInt(opcion) > 5){
-                    System.out.print("\nPor favor, ingresa una opción válida");
-                    Thread.sleep(1000);
-                    System.out.print(".");
-                    Thread.sleep(1000);
-                    System.out.print(".");
-                    Thread.sleep(500);
+                    IngresarOpcionValida.imprimir();
                     continue;
                 }
 
@@ -146,12 +132,7 @@ public class MenuPrincipal {
                 finMenu = true;
             }catch (Exception e)
             {
-                System.out.print("\nPor favor, ingresa una opción válida");
-                Thread.sleep(1000);
-                System.out.print(".");
-                Thread.sleep(1000);
-                System.out.print(".");
-                Thread.sleep(500);
+                IngresarOpcionValida.imprimir();
             }
         }while (finMenu == false);
 
@@ -182,12 +163,7 @@ public class MenuPrincipal {
                 opcion = this.scanner.nextLine();
 
                 if(Integer.parseInt(opcion) < 1 || Integer.parseInt(opcion) > 5){
-                    System.out.print("\nPor favor, ingresa una opción válida");
-                    Thread.sleep(1000);
-                    System.out.print(".");
-                    Thread.sleep(1000);
-                    System.out.print(".");
-                    Thread.sleep(500);
+                    IngresarOpcionValida.imprimir();
                     continue;
                 }
 
@@ -214,12 +190,7 @@ public class MenuPrincipal {
                 finMenu = true;
             }catch (Exception e)
             {
-                System.out.print("\nPor favor, ingresa una opción válida");
-                Thread.sleep(1000);
-                System.out.print(".");
-                Thread.sleep(1000);
-                System.out.print(".");
-                Thread.sleep(500);
+                IngresarOpcionValida.imprimir();
             }
         }while (finMenu == false);
 
@@ -238,7 +209,6 @@ public class MenuPrincipal {
         do
         {
             try{
-
                 System.out.println("\n\t-> Administración de clientes\n");
                 System.out.println("Selecciona una opción");
                 System.out.println("1. Agregar cliente");
@@ -250,12 +220,7 @@ public class MenuPrincipal {
                 opcion = this.scanner.nextLine();
 
                 if(Integer.parseInt(opcion) < 1 || Integer.parseInt(opcion) > 5){
-                    System.out.print("\nPor favor, ingresa una opción válida");
-                    Thread.sleep(1000);
-                    System.out.print(".");
-                    Thread.sleep(1000);
-                    System.out.print(".");
-                    Thread.sleep(500);
+                    IngresarOpcionValida.imprimir();
                     continue;
                 }
 
@@ -278,20 +243,12 @@ public class MenuPrincipal {
                         System.out.println("\nGracias por preferirnos...");
                         break;
                 }
-
                 finMenu = true;
             }catch (Exception e)
             {
-                System.out.print("\nPor favor, ingresa una opción válida");
-                Thread.sleep(1000);
-                System.out.print(".");
-                Thread.sleep(1000);
-                System.out.print(".");
-                Thread.sleep(500);
+                IngresarOpcionValida.imprimir();
             }
         }while (finMenu == false);
-
         return siguienteProceso;
     }
-
 }
