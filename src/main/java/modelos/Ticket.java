@@ -23,6 +23,7 @@ public class Ticket {
         this.total = 0.0;
         this.listaOrden = new ArrayList<>();
     }
+    //TODO: Revisar donde se ejecuta esta clase
     public void agregarProductoOrden(Productos producto, int cantidad){
         double total = producto.getValorUnitario() * cantidad;
         this.total += total;

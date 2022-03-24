@@ -21,7 +21,6 @@ public class OrderList {
         this.precioUnitario = precioUnitario;
         this.total = total;
     }
-
     @Override
     public String toString() {
         String orden = "";

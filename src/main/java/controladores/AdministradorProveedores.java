@@ -11,7 +11,7 @@ import java.util.List;
 public class AdministradorProveedores implements ServicioProveedores {
 
     @Setter @Getter
-    private List<Proveedores> proveedoresRegistrados = new ArrayList<>();
+    private ArrayList<Proveedores> proveedoresRegistrados = new ArrayList<>();
 
     @Override
     public void agregarProveedor(Proveedores proveedor) {
@@ -28,6 +28,4 @@ public class AdministradorProveedores implements ServicioProveedores {
         this.proveedoresRegistrados.add(new Proveedores("SS29383", "Suma Salud",
                 "+1 123 123 3234", "salud@mail.com"));
     }
-
-
 }

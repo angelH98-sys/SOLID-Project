@@ -1,7 +1,7 @@
 package controladores;
 
+import Helpers.clearScreen;
 import interfaces.ServicioVentas;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import modelos.OrderList;
@@ -13,7 +13,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -30,6 +29,9 @@ public class AdministradorVentaCompra implements ServicioVentas {
     private List<Productos> listaProductos;
     private Ventas venta;
     private Scanner scanner;
+
+    AdministradorCorreos correos = new AdministradorCorreos();
+
 
     public String ejecutarVenta(List<Productos> listaProductos) throws InterruptedException {
         this.listaProductos = listaProductos;
@@ -59,49 +61,38 @@ public class AdministradorVentaCompra implements ServicioVentas {
         int lengthNombre, lengthValor;
         System.out.println("\tProductos registrados");
         System.out.println("ID\t\t\t|Nombre\t\t\t\t\t\t|Valor unitario\t|Stock");
-        for (Productos producto : this.listaProductos)
-        {
+        for (Productos producto : this.listaProductos){
             if(producto.getStatus() == "Inactivo") continue;
             System.out.print(producto.getProductoId());
             System.out.print("\t");
             System.out.print(producto.getNombre());
 
             lengthNombre = producto.getNombre().length();
-            if(lengthNombre < 4)
-            {
+            if(lengthNombre < 4){
                 System.out.print("\t\t\t\t\t\t\t");
-            }else if(lengthNombre >= 4 && lengthNombre < 8)
-            {
+            }else if(lengthNombre >= 4 && lengthNombre < 8){
                 System.out.print("\t\t\t\t\t\t");
-            }else if(lengthNombre >= 8 && lengthNombre < 12)
-            {
+            }else if(lengthNombre >= 8 && lengthNombre < 12){
                 System.out.print("\t\t\t\t\t");
-            }else if(lengthNombre >= 12 && lengthNombre < 16)
-            {
+            }else if(lengthNombre >= 12 && lengthNombre < 16){
                 System.out.print("\t\t\t\t");
             }
-            else if(lengthNombre >= 16 && lengthNombre < 20)
-            {
+            else if(lengthNombre >= 16 && lengthNombre < 20){
                 System.out.print("\t\t\t");
-            }else if(lengthNombre >= 20 && lengthNombre < 24)
-            {
+            }else if(lengthNombre >= 20 && lengthNombre < 24){
                 System.out.print("\t\t");
-            }else
-            {
+            }else{
                 System.out.print("\t");
             }
 
             System.out.print("$" + String.format("%.02f", producto.getValorUnitario()));
 
             lengthValor = String.valueOf(producto.getStock()).length();
-            if(lengthValor < 3)
-            {
+            if(lengthValor < 3){
                 System.out.print("\t\t\t");
-            }else if(lengthValor >= 3 && lengthValor < 7)
-            {
+            }else if(lengthValor >= 3 && lengthValor < 7){
                 System.out.print("\t\t");
-            }else
-            {
+            }else{
                 System.out.println("\t");
             }
 
@@ -120,8 +111,7 @@ public class AdministradorVentaCompra implements ServicioVentas {
 
         Productos producto;
 
-        do
-        {
+        do{
             productoId = getProductoId();
             if(productoId == "salir") break;
 
@@ -145,22 +135,18 @@ public class AdministradorVentaCompra implements ServicioVentas {
     public void terminarVenta() {
 
         this.scanner = new Scanner(System.in);
-
         String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
-
         String mail;
 
         if(venta.getListaOrden().size() == 0) return;
 
         System.out.println("\t->Toma de productos finalizada");
         System.out.println("Digita el mail del cliente");
-        do
-        {
 
+        do{
             mail = this.scanner.nextLine();
 
-            if(mail.trim().length() == 0 || !Pattern.matches(regex, mail))
-            {
+            if(mail.trim().length() == 0 || !Pattern.matches(regex, mail)){
                 System.out.println("Debes ingresar un mail valido, intenta nuevamente");
                 continue;
             }
@@ -170,12 +156,10 @@ public class AdministradorVentaCompra implements ServicioVentas {
         }while (true);
 
        String valorRuta = crearComprobanteDePago();
-
-        enviarMail(mail,valorRuta);
+       correos.enviarMail(mail,valorRuta);
     }
 
-    public String getProductoId()
-    {
+    public String getProductoId(){
         String productoId = "";
         Productos producto;
         this.scanner = new Scanner(System.in);
@@ -184,8 +168,7 @@ public class AdministradorVentaCompra implements ServicioVentas {
 
             System.out.print("\nID:");
             productoId = scanner.nextLine();
-            if(productoId.trim().length() == 0)
-            {
+            if(productoId.trim().length() == 0){
                 System.out.print("\tPor favor, ingresa el ID del producto o digita Salir");
                 continue;
             }
@@ -197,8 +180,7 @@ public class AdministradorVentaCompra implements ServicioVentas {
                     .filter(p -> p.getProductoId().equals(finalProductoId))
                     .findAny().orElse(null);
 
-            if(producto == null || producto.getStatus() == "Inactivo")
-            {
+            if(producto == null || producto.getStatus() == "Inactivo"){
                 System.out.print("\tProducto invalido/inactivo, ingresa otro ID");
                 continue;
             }
@@ -217,25 +199,21 @@ public class AdministradorVentaCompra implements ServicioVentas {
         this.scanner = new Scanner(System.in);
 
         do {
-            try
-            {
+            try{
                 System.out.print("\nCantidad:");
                 cantidad = scanner.nextLine();
 
                 cantidad = cantidad.trim();
 
-                if(cantidad.length() == 0)
-                {
+                if(cantidad.length() == 0){
                     System.out.print("\n\tPor favor, ingresa una cantidad valida o digita Salir");
                     continue;
                 }
 
                 if(cantidad.trim().equalsIgnoreCase("salir")) return "salir";
-
                 cantidadInt = Integer.parseInt(cantidad);
 
-                if(cantidadInt < 0)
-                {
+                if(cantidadInt < 0){
                     System.out.print("\n\tPor favor, ingresa una cantidad valida o digita Salir");
                     continue;
                 }
@@ -244,24 +222,21 @@ public class AdministradorVentaCompra implements ServicioVentas {
                         .filter(p -> p.getProductoId().equals(productoId))
                         .findAny().orElse(null);
 
-                if(cantidadInt > producto.getStock())
-                {
+                if(cantidadInt > producto.getStock()){
                     System.out.print("\n\tCantidad no disponible en stock, digita una nueva o Salir");
                     continue;
                 }
-
                 return cantidad;
 
-            }catch (Exception ex)
-            {
+            }catch (Exception ex){
                 System.out.print("\n\tPor favor, ingresa una cantidad valida o digita Salir");
             }
 
         }while (true);
     }
 
-    private String crearComprobanteDePago()
-    {
+
+    private String crearComprobanteDePago(){
         String cuerpoComprobante = "\tTicket de compra";
 
         venta.setTicketDate(new Date());
@@ -272,8 +247,7 @@ public class AdministradorVentaCompra implements ServicioVentas {
 
         cuerpoComprobante += "\nID\t\t\t|Cantidad\t\t|PrecioUni\t|Total\n";
 
-        for (OrderList orden : this.venta.getListaOrden())
-        {
+        for (OrderList orden : venta.getListaOrden()){
             cuerpoComprobante += orden.toString() + "\n";
         }
 
@@ -291,7 +265,7 @@ public class AdministradorVentaCompra implements ServicioVentas {
             ticket.close();
             //codigo agregado
             File f = new File("ticket.txt");
-             ruta = f.getAbsolutePath();
+            ruta = f.getAbsolutePath();
             System.out.println("Comprobante generado exitosamente");
 
         } catch (IOException e) {
@@ -301,11 +275,5 @@ public class AdministradorVentaCompra implements ServicioVentas {
         return ruta;
     }
 
-    private void enviarMail(String mail,String valorRuta) {
-       //Creando Objeto
-        modelos.EnvioCorreo utilidadesCorreo = new modelos.EnvioCorreo();
-        utilidadesCorreo.enviar( mail, "Ticket: "+utilidadesCorreo.generarCodigo(), "Remitimos su Ticket adjunto en este correo.<br> Gracias por Preferirnos",valorRuta);
-
-    }
 
 }
