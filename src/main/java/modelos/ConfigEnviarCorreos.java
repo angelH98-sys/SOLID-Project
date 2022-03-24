@@ -1,6 +1,5 @@
 package modelos;
 
-
 import lombok.Getter;
 import lombok.Setter;
 //--Agregando los import para el envio de correo
@@ -19,10 +18,7 @@ import javax.mail.internet.MimeMultipart;
 import javax.activation.FileDataSource;
 import javax.activation.DataHandler;
 
-
-
-
-public class EnvioCorreo {
+public class ConfigEnviarCorreos {
     @Setter @Getter
     private String host;
     @Setter @Getter
@@ -34,7 +30,7 @@ public class EnvioCorreo {
     @Setter @Getter
     private String destinatario;
 
-    public EnvioCorreo() {
+    public ConfigEnviarCorreos() {
         //Detalles de conexion para envio SMTP
         host 	= "smtp.gmail.com";
         puerto	= "465";
@@ -43,8 +39,7 @@ public class EnvioCorreo {
         password = "prueba123456";
     }
 
-
-    public EnvioCorreo(String host, String puerto, String usuario,String password) {
+    public ConfigEnviarCorreos(String host, String puerto, String usuario, String password) {
         this.host = host;
         this.puerto = puerto;
         this.usuario = usuario;
@@ -55,19 +50,15 @@ public class EnvioCorreo {
 
         //Seteando las propiedades para el envio de correo
         Properties props = new Properties();
-
-
         props.put( "mail.smtp.host", host );
         props.put( "mail.smtp.port", puerto );
         props.put( "mail.smtp.ssl.enable", "true" );
         props.put( "mail.smtp.auth", "true" );
 
-
         // Create the Session Object
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 
             protected PasswordAuthentication getPasswordAuthentication() {
-
                 return new PasswordAuthentication(usuario, password);
 
             }
@@ -110,23 +101,20 @@ public class EnvioCorreo {
 
             Transport.send( message );
 
-
         }
         catch( MessagingException exc ) {
 
             throw new RuntimeException("No fue posible enviar el correo");
         }
-    }//Fin de la funcion de envío de correo
-
+    }
 
     //Función que genera el código de ticket que se envía por correo
     public int generarCodigo(){
-      //Creacion de Número Aleatorio para el ID del Ticket
-        Random rand = new Random(); //instance of random class
+        Random rand = new Random();
         int upperbound = 1000;
         //generate random values from 0-24
+        //TODO: Una vez se confirme por que de 0-24 remover el comentario anterior
         int int_random = rand.nextInt(upperbound);
-
        return int_random;
     }
 
