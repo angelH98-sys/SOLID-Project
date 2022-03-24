@@ -14,7 +14,7 @@ public class MenuPrincipal {
         String siguienteProceso = "";
         boolean finMenu = false;
 
-        System.out.println("Menu Principal");
+        System.out.println("\nMenu Principal");
         System.out.println("----------------------------------------");
         do{
             try {

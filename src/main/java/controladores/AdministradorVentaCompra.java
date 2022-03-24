@@ -26,6 +26,7 @@ public class AdministradorVentaCompra implements ServicioVentas {
     @Getter @Setter
     private List<Ventas> listaVentas;
 
+    @Getter @Setter
     private List<Productos> listaProductos;
     private Ventas venta;
     private Scanner scanner;
@@ -168,20 +169,12 @@ public class AdministradorVentaCompra implements ServicioVentas {
 
             System.out.print("\nID:");
             productoId = scanner.nextLine();
-            if(productoId.trim().length() == 0){
-                System.out.print("\tPor favor, ingresa el ID del producto o digita Salir");
-                continue;
-            }
 
-            if(productoId.trim().equalsIgnoreCase("salir")) return "salir";
+            if(productoId.trim().equalsIgnoreCase("salir"))
+                return "salir";
 
-            String finalProductoId = productoId;
-            producto = listaProductos.stream()
-                    .filter(p -> p.getProductoId().equals(finalProductoId))
-                    .findAny().orElse(null);
-
-            if(producto == null || producto.getStatus() == "Inactivo"){
-                System.out.print("\tProducto invalido/inactivo, ingresa otro ID");
+            if(!esValidoProductoId(productoId)) {
+                System.out.print("\tPor favor, ingresa el ID del producto valido o digita Salir");
                 continue;
             }
 
@@ -190,95 +183,79 @@ public class AdministradorVentaCompra implements ServicioVentas {
         }while (true);
     }
 
+    public boolean esValidoProductoId(String productoId)
+    {
+        //Validando si ha ingresado algo en la consola
+        if(productoId.trim().length() == 0)
+            return false;
+
+        //Validando si ingreso un ID existente en la lista de productos
+        Productos producto = listaProductos.stream()
+                .filter(p -> p.getProductoId().equals(productoId))
+                .findAny().orElse(null);
+
+        if(producto == null || producto.getStatus() == "Inactivo")
+            return false;
+
+        return true;
+    }
+
     private String getCantidad(String productoId) {
 
         String cantidad = "";
-        int cantidadInt;
-        Productos producto;
 
         this.scanner = new Scanner(System.in);
 
         do {
-            try{
-                System.out.print("\nCantidad:");
-                cantidad = scanner.nextLine();
 
-                cantidad = cantidad.trim();
+            System.out.print("\nCantidad:");
+            cantidad = scanner.nextLine();
 
-                if(cantidad.length() == 0){
-                    System.out.print("\n\tPor favor, ingresa una cantidad valida o digita Salir");
-                    continue;
-                }
+            if(cantidad.trim().equalsIgnoreCase("salir")) return "salir";
 
-                if(cantidad.trim().equalsIgnoreCase("salir")) return "salir";
-                cantidadInt = Integer.parseInt(cantidad);
-
-                if(cantidadInt < 0){
-                    System.out.print("\n\tPor favor, ingresa una cantidad valida o digita Salir");
-                    continue;
-                }
-
-                producto = listaProductos.stream()
-                        .filter(p -> p.getProductoId().equals(productoId))
-                        .findAny().orElse(null);
-
-                if(cantidadInt > producto.getStock()){
-                    System.out.print("\n\tCantidad no disponible en stock, digita una nueva o Salir");
-                    continue;
-                }
-                return cantidad;
-
-            }catch (Exception ex){
+            if(!esValidaCantidad(productoId, cantidad))
+            {
                 System.out.print("\n\tPor favor, ingresa una cantidad valida o digita Salir");
+                continue;
             }
+            return cantidad;
+
 
         }while (true);
     }
 
-    
-    
-    public Integer validarExistencias(String productoId, String cantidad) {
+    public boolean esValidaCantidad(String productoId, String cantidad)
+    {
 
+        try
+        {
+            //Validando si han escrito algo
+            if(cantidad.trim().length() == 0)
+                return false;
 
-        int cantidadInt;
-        int cantidadValor=0;
-        Productos producto;
+            //Validando que hayan escrito un valor numerico
+            //Si no lo han echo, retorna false por la esepcion que generaria
+            int cantidadInt = Integer.parseInt(cantidad);
 
+            //Si el valor que han escrito es mayor a cero
+            //No es posible llevar 0 o -n productos
+            if(cantidadInt <= 0)
+                return false;
 
-            try{
+            Productos producto = listaProductos.stream()
+                    .filter(p -> p.getProductoId().equals(productoId))
+                    .findAny().orElse(null);
 
-                cantidad    = cantidad.trim();
+            //En caso que la cantidad que ingresen rebasa la cantidad que existe en stock
+            if(cantidadInt > producto.getStock())
+                return false;
 
-                cantidadInt = Integer.parseInt(cantidad);
+        }catch (Exception ex)
+        {
+            return false;
+        }
 
-
-                if(cantidadInt < 0){
-                    System.out.print("\n\tPor favor, ingresa una cantidad valida");
-                }
-
-
-                producto = listaProductos.stream()
-                        .filter(p -> p.getProductoId().equals(productoId))
-                        .findAny().orElse(null);
-
-
-
-
-                if(cantidadInt > producto.getStock()){
-                    System.out.print("\n\tCantidad no disponible en stock");
-                }
-                else{
-                    cantidadValor =  (producto.getStock() -cantidadInt);
-
-                }
-
-
-            }catch (Exception ex){
-                System.out.print("\n\tPor favor, ingresa una cantidad valida o digita Salir");
-            }
-
-
-        return cantidadValor;
+        return true;
     }
 
     private String crearComprobanteDePago(){
@@ -315,7 +292,7 @@ public class AdministradorVentaCompra implements ServicioVentas {
 
         } catch (IOException e) {
             System.out.println("No fue posible crear comprobante");
-            e.printStackTrace();
+            return null;
         }
         return ruta;
     }
