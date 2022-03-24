@@ -235,6 +235,51 @@ public class AdministradorVentaCompra implements ServicioVentas {
         }while (true);
     }
 
+    
+    
+    public Integer validarExistencias(String productoId, String cantidad) {
+
+
+        int cantidadInt;
+        int cantidadValor=0;
+        Productos producto;
+
+
+            try{
+
+                cantidad    = cantidad.trim();
+
+                cantidadInt = Integer.parseInt(cantidad);
+
+
+                if(cantidadInt < 0){
+                    System.out.print("\n\tPor favor, ingresa una cantidad valida");
+                }
+
+
+                producto = listaProductos.stream()
+                        .filter(p -> p.getProductoId().equals(productoId))
+                        .findAny().orElse(null);
+
+
+
+
+                if(cantidadInt > producto.getStock()){
+                    System.out.print("\n\tCantidad no disponible en stock");
+                }
+                else{
+                    cantidadValor =  (producto.getStock() -cantidadInt);
+
+                }
+
+
+            }catch (Exception ex){
+                System.out.print("\n\tPor favor, ingresa una cantidad valida o digita Salir");
+            }
+
+
+        return cantidadValor;
+    }
 
     private String crearComprobanteDePago(){
         String cuerpoComprobante = "\tTicket de compra";
