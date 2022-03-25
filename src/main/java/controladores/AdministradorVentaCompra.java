@@ -234,7 +234,7 @@ public class AdministradorVentaCompra implements ServicioVentas {
                 return false;
 
             //Validando que hayan escrito un valor numerico
-            //Si no lo han echo, retorna false por la esepcion que generaria
+            //Si no lo han echo, retorna false por la excepcion que generaria
             int cantidadInt = Integer.parseInt(cantidad);
 
             //Si el valor que han escrito es mayor a cero
