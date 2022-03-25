@@ -1,0 +1,26 @@
+Mar 25, 2022 7:43:29 AM main main
+INFO: Inicio de ejecucion
+Mar 25, 2022 7:43:29 AM Vistas.MenuPrincipal menuPrincipal
+INFO: Inicio menuPrincipal
+Mar 25, 2022 7:43:34 AM Vistas.MenuPrincipal menuPrincipal
+INFO: Fin menuPrincipal
+Mar 25, 2022 7:43:34 AM controladores.AdministradorVentaCompra ejecutarVenta
+INFO: Inicio ejecutarVenta
+Mar 25, 2022 7:43:34 AM controladores.AdministradorVentaCompra agregarProductoAOrden
+INFO: Inicio agregarProductoAOrden
+Mar 25, 2022 7:43:34 AM controladores.AdministradorVentaCompra agregarProductoAOrden
+INFO: Inicio toma de datos
+Mar 25, 2022 7:43:49 AM controladores.AdministradorVentaCompra agregarProductoAOrden
+INFO: Fin agregarProductoAOrden
+Mar 25, 2022 7:43:49 AM controladores.AdministradorVentaCompra terminarVenta
+INFO: Inicio terminarVenta
+Mar 25, 2022 7:43:52 AM controladores.AdministradorVentaCompra terminarVenta
+WARNING: Mail del cliente: angelh, invalido
+Mar 25, 2022 7:44:03 AM controladores.AdministradorVentaCompra terminarVenta
+INFO: Fin terminarVenta
+Mar 25, 2022 7:44:06 AM Vistas.MenuPrincipal menuPrincipal
+INFO: Inicio menuPrincipal
+Mar 25, 2022 7:44:08 AM Vistas.MenuPrincipal menuPrincipal
+INFO: Fin menuPrincipal
+Mar 25, 2022 7:44:08 AM main main
+INFO: Fin ejecucion

@@ -1,9 +1,0 @@
-	Ticket de compra
-Fecha de compra: Thu Mar 24 15:04:50 CST 2022
-
-Productos seleccionados
-ID			|Cantidad		|PrecioUni	|Total
-BIC15796	2			$200.00		$400.00
----------------------------------
-									$400.00
-GRACIAS POR PREFERIRNOS

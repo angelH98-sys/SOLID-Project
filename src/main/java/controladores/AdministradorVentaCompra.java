@@ -1,5 +1,6 @@
 package controladores;
 
+import Helpers.Log;
 import Helpers.clearScreen;
 import interfaces.ServicioVentas;
 import lombok.Getter;
@@ -14,6 +15,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 
@@ -35,6 +38,9 @@ public class AdministradorVentaCompra implements ServicioVentas {
 
 
     public String ejecutarVenta(List<Productos> listaProductos) throws InterruptedException {
+
+        Log.logger.log(Level.INFO, "Inicio ejecutarVenta");
+
         this.listaProductos = listaProductos;
         venta = new Ventas();
 
@@ -59,6 +65,7 @@ public class AdministradorVentaCompra implements ServicioVentas {
 
     @Override
     public void mostrarProductosDisponibles() {
+
         int lengthNombre, lengthValor;
         System.out.println("\tProductos registrados");
         System.out.println("ID\t\t\t|Nombre\t\t\t\t\t\t|Valor unitario\t|Stock");
@@ -98,11 +105,14 @@ public class AdministradorVentaCompra implements ServicioVentas {
             }
 
             System.out.print(producto.getStock() + " unidad(es)\n");
+            Log.logger.log(Level.FINE, "mostrarProductosDisponibles ejecutado");
         }
     }
 
     @Override
     public void agregarProductoAOrden() {
+
+        Log.logger.log(Level.INFO, "Inicio agregarProductoAOrden");
 
         System.out.println("\nEscribe el ID del producto que desees y haz enter para agregarlo");
         System.out.println("Cuando finalices, escribe Salir/salir");
@@ -111,13 +121,15 @@ public class AdministradorVentaCompra implements ServicioVentas {
         String cantidad;
 
         Productos producto;
-
+        Log.logger.log(Level.INFO, "Inicio toma de datos");
         do{
             productoId = getProductoId();
             if(productoId == "salir") break;
 
             cantidad = getCantidad(productoId);
             if(cantidad == "salir") break;
+
+            Log.logger.log(Level.FINE, "Producto agregado a orden: " + productoId + ", " + cantidad);
 
             String finalProductoId = productoId;
 
@@ -129,11 +141,13 @@ public class AdministradorVentaCompra implements ServicioVentas {
 
         }while (productoId.trim().toLowerCase() != "salir");
 
+        Log.logger.log(Level.INFO, "Fin agregarProductoAOrden");
     }
 
 
     @Override
     public void terminarVenta() {
+        Log.logger.log(Level.INFO, "Inicio terminarVenta");
 
         this.scanner = new Scanner(System.in);
         String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
@@ -148,6 +162,7 @@ public class AdministradorVentaCompra implements ServicioVentas {
             mail = this.scanner.nextLine();
 
             if(mail.trim().length() == 0 || !Pattern.matches(regex, mail)){
+                Log.logger.log(Level.WARNING, "Mail del cliente: " + mail + ", invalido");
                 System.out.println("Debes ingresar un mail valido, intenta nuevamente");
                 continue;
             }
@@ -156,8 +171,14 @@ public class AdministradorVentaCompra implements ServicioVentas {
 
         }while (true);
 
-       String valorRuta = crearComprobanteDePago();
-       correos.enviarMail(mail,valorRuta);
+        Log.logger.log(Level.FINE, "Mail del cliente: " + mail);
+
+        String valorRuta = crearComprobanteDePago();
+
+        correos.enviarMail(mail,valorRuta);
+
+        Log.logger.log(Level.INFO, "Fin terminarVenta");
+
     }
 
     public String getProductoId(){
@@ -171,9 +192,13 @@ public class AdministradorVentaCompra implements ServicioVentas {
             productoId = scanner.nextLine();
 
             if(productoId.trim().equalsIgnoreCase("salir"))
+            {
+                Log.logger.log(Level.FINE, "Salida de toma de datos");
                 return "salir";
+            }
 
             if(!esValidoProductoId(productoId)) {
+                Log.logger.log(Level.WARNING, "ID de producto: " + productoId + ", invalido");
                 System.out.print("\tPor favor, ingresa el ID del producto valido o digita Salir");
                 continue;
             }
@@ -215,6 +240,7 @@ public class AdministradorVentaCompra implements ServicioVentas {
 
             if(!esValidaCantidad(productoId, cantidad))
             {
+                Log.logger.log(Level.WARNING, "Cantidad ingresada: " + cantidad + ", invalida");
                 System.out.print("\n\tPor favor, ingresa una cantidad valida o digita Salir");
                 continue;
             }
@@ -291,9 +317,12 @@ public class AdministradorVentaCompra implements ServicioVentas {
             System.out.println("Comprobante generado exitosamente");
 
         } catch (IOException e) {
+            Log.logger.log(Level.WARNING, "Comprobante no creado: " + e.getMessage());
             System.out.println("No fue posible crear comprobante");
             return null;
         }
+
+        Log.logger.log(Level.FINE, "Comprobante creado: " + ruta);
         return ruta;
     }
 

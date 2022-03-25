@@ -1,10 +1,12 @@
 package modelos;
 
+import Helpers.Log;
 import lombok.Getter;
 import lombok.Setter;
 //--Agregando los import para el envio de correo
 import java.util.Properties;
 import java.util.Random;
+import java.util.logging.Level;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -100,11 +102,11 @@ public class ConfigEnviarCorreos {
             message.setContent( multipart );
 
             Transport.send( message );
-
+            Log.logger.log(Level.FINE, "Mail enviado");
         }
         catch( MessagingException exc ) {
 
-            throw new RuntimeException("No fue posible enviar el correo");
+            Log.logger.log(Level.WARNING, "No fue posible enviar mail: " + exc.getMessage());
         }
     }
 

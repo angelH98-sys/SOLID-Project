@@ -1,14 +1,18 @@
 package Vistas;
 
 import Helpers.IngresarOpcionValida;
+import Helpers.Log;
 
 import java.util.Scanner;
+import java.util.logging.Level;
 
 public class MenuPrincipal {
 
     private Scanner scanner = new Scanner(System.in);
 
     public String menuPrincipal() throws InterruptedException{
+
+        Log.logger.log(Level.INFO, "Inicio menuPrincipal");
 
         String opcion = "";
         String siguienteProceso = "";
@@ -26,6 +30,7 @@ public class MenuPrincipal {
                 opcion = this.scanner.nextLine();
 
                 if(Integer.parseInt(opcion) < 1 || Integer.parseInt(opcion) > 2){
+                    Log.logger.log(Level.WARNING, "Opcion de usuario:" + opcion + ", invalida");
                     IngresarOpcionValida.imprimir();
                     continue;
                 }
@@ -39,11 +44,14 @@ public class MenuPrincipal {
                         System.out.println("\nGracias por preferirnos...");
                         break;
                 }
+
+                Log.logger.log(Level.FINE, "Opcion de usuario:" + opcion + ", " + siguienteProceso);
                 finMenu = true;
             } catch (Exception e) {
                 IngresarOpcionValida.imprimir();
             }
         }while (finMenu == false);
+        Log.logger.log(Level.INFO, "Fin menuPrincipal");
         return  siguienteProceso;
     }
 
